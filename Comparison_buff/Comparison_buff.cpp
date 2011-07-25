@@ -5,7 +5,8 @@
 #include "stdafx.h"
 
 // returns true if the line is successfully read
-bool fileReadLine (FILE* f, double* time, int* bin) {
+bool fileReadLine (FILE* f, double* time, int* bin) 
+{
 	return fscanf(f, "%lf%d", time, bin) == 2;
 }
 
@@ -25,15 +26,15 @@ int _tmain(int argc, _TCHAR* argv[])
 			// event timestamp match
 			printf("event match %lf, %lf; enegries %d and %d\n", time0, time1, bin0, bin1);
 		}
-		// take the next insance from one of the files
+		// take the next instance from one of the files
 		if (time1 > time0) {
 			if (feof(f0))
-				return 0;
+				break;
 			if (!fileReadLine(f0, &time0, &bin0))
 				return -1;
 		} else {
 			if (feof(f1))
-				return 0;
+				break;
 			if (!fileReadLine(f1, &time1, &bin1))
 				return -1;
 		}
